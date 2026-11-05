@@ -27,13 +27,21 @@ Do not switch it to a source install unless you also run the build.
   (11 tests, including the real contract check).
 - `install.sh` emits the right five commands, stops at the first failure, and
   refuses to run without a `dsh` binary (tested with a stub CLI).
+- `install.sh --mode cli` was run end to end in a throwaway HOME: all five
+  sources fetched (four clones plus the malo release tarball), `guster`,
+  `galadon` and `baton` executed, six skill symlinks resolved to real
+  directories with a readable `SKILL.md`, and a second run was idempotent.
+  The malo tarball's `out/main/index.js` was present, which is the reason it
+  cannot be installed from source.
 
 ## What has not been verified
 
 - A real `dsh plugin add` against these URLs on a clean machine. The command
   form comes from each plugin's own README; the URLs and the malo tarball were
   checked over HTTP, but the install itself was not executed here.
-- The five plugins running together in one DSH session.
+- Codex's local-marketplace install path, and whether Cursor calls the CLIs
+  when pointed at the skill directory by a rules file.
+- The five plugins running together in one session.
 
 If you hit a problem, open an issue on the repo you installed from and note
 which plugin and which of the above two items it falls under.

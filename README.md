@@ -1,36 +1,80 @@
 # Lumos dev toolkit
 
-一套自己用的 DeepSeek Harness 插件组合：把「上下文 → 工程骨架 → 任务派发 →
-真实环境录制 → 交付视频」这一条链路一次装齐。
+把「上下文 → 工程骨架 → 任务派发 → 真实录制 → 交付视频」这一条链路一次装齐：
+五个独立插件，五个独立仓库，这里是**一键安装 + 接缝说明**。
 
-不是官方市场包，只放在这里给自己人用。五个插件各自独立、各自有仓库，这里只做
-**一键安装 + 接缝说明**，不打包、不改它们的源码。
+不打包、不改它们的源码，仓库里没有一行插件代码。
+
+## 先搞清楚一件事
+
+这五个东西的**主体不是插件，是「CLI + 一份 SKILL.md」**。插件壳（DSH 的
+`dsh.bundle`、ZCode 的 marketplace 条目）只是宿主适配层，而各宿主的适配能力并不一样：
+
+| 宿主 | 能拿到什么 | 怎么装 |
+|---|---|---|
+| **DeepSeek Harness** | 原生插件，装完 skill 自动挂载 | `--mode dsh`（默认） |
+| **Codex** | 5 个里 4 个带 `.codex-plugin`（`baton` 没有），可走本地 marketplace | 见下 |
+| **Cursor** 等只有 rules 的宿主 | 没有插件机制，但 **CLI 照样能用** | `--mode cli` |
+| 任意 shell / CI | CLI 直接可用 | `--mode cli` |
+
+所以「一条命令装进 agent」没有通用解——插件安装是宿主私有的。能做的是：
+**一条命令把命令放到 PATH、把说明书放到该放的位置**，剩下的由各宿主的读取习惯决定。
 
 ## 快速开始
 
-```bash
-git clone https://github.com/Lumos-789/Lumos-dev-toolkit.git
-cd Lumos-dev-toolkit
-./install.sh
-```
+不用 clone，分两种模式。
 
-先看会装什么、不实际安装：
+**DeepSeek Harness（原生插件）**
 
 ```bash
-./install.sh --dry-run
+curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash
 ```
 
-只装其中几个：
+**Cursor / 其它宿主（便携 CLI）**
 
 ```bash
-./install.sh --only guster,malo-browser
+curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash -s -- --mode cli
 ```
 
-脚本会依次执行 `dsh plugin add <来源>`。找不到 `dsh` 时它直接停下并打印完整命令，
-不会假装成功。装完在 DSH 里用 `dsh plugin list` 或直接让 agent 加载对应技能名确认。
+它做三件事：把五个仓库取到 `~/.local/share/lumos-dev-toolkit`、把 `guster` /
+`galadon` / `baton` 链接进 `~/.local/bin`、把六份 skill 链接进 `~/.agents/skills`。
 
-> `dsh` 不在 PATH 上时：`./install.sh --dsh /path/to/dsh` 或
-> `DSH_BIN=/path/to/dsh ./install.sh`。
+**两种都要**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash -s -- --mode all
+```
+
+**先看再装**（不写任何东西，也不需要 dsh）
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash -s -- --dry-run
+curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash -s -- --list
+```
+
+**只装其中几个**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash -s -- --mode cli --only guster,malo-browser
+```
+
+找不到 `dsh` 时脚本直接停下，打印完整命令并告诉你改走 `--mode cli`，不会假装成功。
+
+> 可覆盖的路径：`LUMOS_HOME`（源）、`BIN_DIR`（命令）、`SKILLS_DIR`（技能）。
+> 想改脚本或习惯先读一遍：`git clone` 后 `./install.sh`，行为完全一致。
+> 更新：`git -C ~/.local/share/lumos-dev-toolkit/<name> pull`，skill 链接会跟着变。
+
+## Cursor 里怎么让它真的用上
+
+CLI 进了 PATH 不等于 agent 会调用。Cursor 只读项目内的规则文件，所以在那类宿主里
+把这一句放进 `.cursor/rules`（或项目 `AGENTS.md`）即可：
+
+```text
+需要上下文治理 / 工程循环 / 任务派发 / 演示录制 / 交付视频时，
+先读 ~/.agents/skills/<name>/SKILL.md，按里面的命令执行。
+```
+
+DSH 和 Codex 读 `~/.agents/skills`，不需要这句。
 
 ## 五个插件
 
@@ -79,7 +123,7 @@ cd Lumos-dev-toolkit
 |---|---|
 | `guster` | Python 3.9+，无第三方依赖 |
 | `galadon` | Python 3.10+，`PyYAML` |
-| `baton` | Python 3.10+，DSH 0.2.1-rc.2+（要 `subagent` 工具） |
+| `baton` | Python 3.10+，OpenSpec；`--mode dsh` 还要 DSH 0.2.1-rc.2+（`subagent` 工具） |
 | `malo-browser` | Node 22.12+ / 24 / 26+，`ffmpeg`+`ffprobe`，macOS（已验证路径） |
 | `delivery-video` | Python 3.9+，`ffmpeg`+`ffprobe`，`pip install "edge-tts>=7.3.1" Pillow`，中文字体 |
 
@@ -88,7 +132,7 @@ cd Lumos-dev-toolkit
 ## 目录
 
 ```text
-install.sh             一键装五个（--dry-run / --only / --dsh / --list）
+install.sh             一键装（--mode dsh|cli|all / --dry-run / --only / --dsh / --list）
 VERSIONS.md            这次组合对应的版本与提交，以及哪些验证过、哪些没有
 docs/seams.md          两处接缝和三个松耦合点
 compat/malo_to_dv.py   把 malo evidence 转成 delivery-video 认的格式
@@ -109,8 +153,10 @@ DELIVERY_VIDEO_SCRIPTS=/path/to/delivery-video-plugin/skills/delivery-video/scri
 ## 状态
 
 - 五个插件都是各自仓库的当前 `main`，提交见 [VERSIONS.md](VERSIONS.md)。
-- 未做端到端联调：没有在干净机器上真跑过 `dsh plugin add`，也没有五个同时在
-  一个 DSH 会话里跑过。首次安装若失败，按脚本打印的命令手工重试并回报。
+- **`--mode cli` 在临时 HOME 里真跑过**：五个源到位、`guster`/`galadon`/`baton`
+  三个命令可执行、六份 skill 链接可解析、重跑幂等。
+- **未验证**：`dsh plugin add` 在干净机器上的真实安装；Codex 本地 marketplace 的
+  安装步骤；Cursor 是否按上面的规则正确调用 CLI。
 
 ## License
 
