@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "demo-stage-recording",
+  "status": "passed",
+  "app": {
+    "name": "malo-browser",
+    "version": "0.1.6",
+    "electron": "45.1.0",
+    "chromium": "156.0.8078.49",
+    "node": "24.22.1"
+  },
+  "scene": {
+    "id": "fixture-report-review",
+    "title": "demo fixture",
+    "url": "http://127.0.0.1:4788/index.html",
+    "profile": "malo-browser-fixture",
+    "script_sha256": "eacf92544521154bd2946a6b91f832bc8b1b11d6d0b48ebbb693edfa6a41b5fa"
+  },
+  "run": {
+    "mode": "record",
+    "started_at": "2026-11-04T10:41:42.515Z",
+    "ended_at": "2026-11-04T10:41:54.920Z",
+    "elapsed_ms": 12405,
+    "window_mode": "hidden",
+    "headless": true,
+    "focus_emulation": true
+  },
+  "capture": {
+    "method": "electron-cdp-screencast",
+    "format": "jpeg",
+    "quality": 90,
+    "viewport": [1440, 900],
+    "device_scale_factor": 2,
+    "window_visible": false,
+    "max_frame": [1920, 1080],
+    "raw_frames": 927,
+    "effective_fps": 92.69,
+    "timeline_frames": 300,
+    "ack_errors": 0
+  },
+  "video": {
+    "file": "take-01.mp4",
+    "size": [1920, 1080],
+    "fps": 30,
+    "frames": 300,
+    "duration_s": 10,
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "checks": {
+    "node_isolated": {
+      "passed": true,
+      "detail": "window.require/process/module exposed=false"
+    },
+    "frames_arrived": {
+      "passed": true,
+      "detail": "raw_frames=927"
+    },
+    "duration": {
+      "passed": true,
+      "detail": "video=10.00s target=10s"
+    },
+    "fps": {
+      "passed": true,
+      "detail": "avg_frame_rate=30.00"
+    },
+    "resolution": {
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    "black_frames": {
+      "passed": true,
+      "detail": "black=0.00s ratio=0.000"
+    },
+    "overlay_in_video": {
+      "passed": true,
+      "detail": "blue_pixels 7085 -> 21290 at 1.42s"
+    }
+  },
+  "cpu": {
+    "avg_percent": 5.51,
+    "max_percent": 5.98
+  }
+}
