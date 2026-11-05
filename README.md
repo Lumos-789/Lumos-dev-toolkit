@@ -1,23 +1,19 @@
 # Lumos dev toolkit
 
-五个独立插件，一键装齐。
+Five independent plugins, installed together.
 
-| | |
-|---|---|
-| `guster` | 上下文管理 |
-| `galadon` | 工程框架 |
-| `baton` | 任务调度 |
-| `malo-browser` | 浏览器与录制 |
-| `delivery-video` | 交付视频 |
+- **guster** — context management. Audits and evolves agent context across a machine: instruction files, skills, knowledge, credentials, project state.
+- **galadon** — project framework. A five-stage engineering loop (spec, build, verify, ship, learn) with a layout/stack scaffold generator and a deploy port.
+- **baton** — task dispatch. A ticket/DAG control plane that turns an OpenSpec change into parallel subagent work and only accepts sealed receipts.
+- **malo-browser** — browser and recording. A scripted demo runtime on Electron + Chromium: headless capture, 1080p30, evidence files, port leases for concurrent agents.
+- **delivery-video** — delivery video. Real recordings plus narration, word-synced subtitles and a deterministic quality gate that refuses a fake or broken demo.
+
+## Install
 
 ```bash
+# DeepSeek Harness
 curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash
-```
 
-不用 DeepSeek Harness 的机器：
-
-```bash
+# any host without a plugin system (Cursor and similar): CLIs on PATH, skills linked
 curl -fsSL https://raw.githubusercontent.com/Lumos-789/Lumos-dev-toolkit/main/install.sh | bash -s -- --mode cli
 ```
-
-参数看 `--help`。版本见 [VERSIONS.md](VERSIONS.md)，接缝见 [docs/seams.md](docs/seams.md)。
