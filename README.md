@@ -1,12 +1,14 @@
 # Lumos dev toolkit
 
-Five independent plugins covering one workflow: context, project scaffolding, task dispatch, demo recording and delivery video.
+Five independent plugins covering one workflow: context, scaffolding, dispatch, recording, delivery.
 
-- **guster** — Context audit. It scans every project on a machine and reports which instruction files, skills, knowledge and credential pointers are stale, unread or duplicated. It scores the result, so you can tell whether an agent would actually load the context you wrote.
-- **galadon** — Project lifecycle. It runs a project through five phases (spec, build, verify, ship, learn), one artifact and one gate per phase, so the next action is never ambiguous. Its deploy port ships, probes the running service and rolls back when the probe fails.
-- **baton** — Task dispatch. It turns one approved OpenSpec change into a DAG of tickets and dispatches them to parallel subagents in isolated worktrees. A task is complete only when a hash-bound receipt shows its verification passed.
-- **malo-browser** — Demo recording. It drives a real Chromium through a scripted demo headlessly and records at 1080p30 without taking the window. Each take gets an evidence file binding the video to the script that produced it, and several agents can run separate sessions through port leases.
-- **delivery-video** — Delivery video. It turns a real recording into a narrated, subtitled video and runs a hard quality gate on resolution, frame rate, audio, loudness, black frames and freeze frames. The file it hands over is the gated file, bound by hash.
+| Plugin | Focus | What it does |
+|---|---|---|
+| **guster** | Context audit | Scans every project for stale, unread or duplicated context. Scores whether an agent would actually load it. |
+| **galadon** | Project lifecycle | Drives a project through five phases, one artifact and one gate each. Deploys, probes, and rolls back on failure. |
+| **baton** | Task dispatch | Turns one approved change into a ticket DAG for parallel subagents. A task counts as done only with a hash-bound receipt. |
+| **malo-browser** | Demo recording | Records a scripted demo in headless Chromium at 1080p30 without taking the window. Each take is bound to its script by evidence. |
+| **delivery-video** | Delivery video | Turns a real recording into a narrated, subtitled video. Refuses to ship unless it clears the hard quality gate. |
 
 ## Install
 
