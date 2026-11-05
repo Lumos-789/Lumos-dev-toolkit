@@ -4,11 +4,11 @@ Five independent plugins covering one workflow: context, scaffolding, dispatch, 
 
 | Plugin | Focus | What it does |
 |---|---|---|
-| **guster** | Context audit | Scans every project for stale, unread or duplicated context. Scores whether an agent would actually load it. |
-| **galadon** | Project lifecycle | Drives a project through five phases, one artifact and one gate each. Deploys, probes, and rolls back on failure. |
-| **baton** | Task dispatch | Turns one approved change into a ticket DAG for parallel subagents. A task counts as done only with a hash-bound receipt. |
-| **malo-browser** | Demo recording | Records a scripted demo in headless Chromium at 1080p30 without taking the window. Each take is bound to its script by evidence. |
-| **delivery-video** | Delivery video | Turns a real recording into a narrated, subtitled video. Refuses to ship unless it clears the hard quality gate. |
+| **guster** | Context&nbsp;audit | Scans every project for stale, unread or duplicated context, then scores whether an agent would load it. |
+| **galadon** | Project&nbsp;lifecycle | Runs five phases, one artifact and one gate each. Deploys, probes, rolls back on failure. |
+| **baton** | Task&nbsp;dispatch | Turns one change into a ticket DAG for parallel subagents. Only a hash-bound receipt closes a task. |
+| **malo-browser** | Demo&nbsp;recording | Records a scripted demo headlessly at 1080p30 without taking the window. Each take is bound to its script. |
+| **delivery-video** | Delivery&nbsp;video | Turns a real recording into a narrated, subtitled video. Refuses to ship unless the quality gate passes. |
 
 ## Install
 
