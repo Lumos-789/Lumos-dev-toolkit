@@ -1,12 +1,12 @@
 # Lumos dev toolkit
 
-Five independent plugins covering one loop — from knowing your context to shipping the proof.
+Five independent plugins covering one workflow: context, project scaffolding, task dispatch, demo recording and delivery video.
 
-- **guster** — *the map.* Walks every project on the machine, reads the instruction files, skills, knowledge and credential pointers, then names the ones that have gone stale, unread or duplicated. Scores how much context an agent would actually load.
-- **galadon** — *the rails.* Five phases — spec, build, verify, ship, learn — one artifact and one gate each, so the agent never has to guess the next action. Scaffolds a project's internal layering, and its deploy port ships, probes and rolls back on its own.
-- **baton** — *the conductor.* Turns one approved change into a DAG of tickets and hands them to parallel subagents in isolated worktrees. A task counts as done only when a hash-bound receipt proves its verification ran green; "it works" in prose is ignored.
-- **malo-browser** — *the stage.* A real Chromium that runs a scripted demo headlessly and records it at 1080p30 without ever stealing the window. Each take gets an evidence file binding the video to the script that produced it, and several agents can drive it at once on leased ports.
-- **delivery-video** — *the proof.* Turns a recording that actually ran into a narrated, subtitled delivery video, then refuses to hand it over unless it clears hard checks on resolution, frame rate, audio, loudness, black frames and freeze frames. The file you get is the file the gate passed, bound by hash.
+- **guster** — Context audit. It scans every project on a machine and reports which instruction files, skills, knowledge and credential pointers are stale, unread or duplicated. It scores the result, so you can tell whether an agent would actually load the context you wrote.
+- **galadon** — Project lifecycle. It runs a project through five phases (spec, build, verify, ship, learn), one artifact and one gate per phase, so the next action is never ambiguous. Its deploy port ships, probes the running service and rolls back when the probe fails.
+- **baton** — Task dispatch. It turns one approved OpenSpec change into a DAG of tickets and dispatches them to parallel subagents in isolated worktrees. A task is complete only when a hash-bound receipt shows its verification passed.
+- **malo-browser** — Demo recording. It drives a real Chromium through a scripted demo headlessly and records at 1080p30 without taking the window. Each take gets an evidence file binding the video to the script that produced it, and several agents can run separate sessions through port leases.
+- **delivery-video** — Delivery video. It turns a real recording into a narrated, subtitled video and runs a hard quality gate on resolution, frame rate, audio, loudness, black frames and freeze frames. The file it hands over is the gated file, bound by hash.
 
 ## Install
 
